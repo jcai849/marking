@@ -12,9 +12,13 @@ midway, without requiring any restarts.
 
 MECHANISM
 
-A makefile controls the build. 'make build' attempts to generate an html file
-for every (case-insensitive) Rmd file. If successful, the html file is sent to
-the 'build-successful' directory. In the case of failure to compile, the faulty
-Rmd files are copied to a 'build-failure' directory. All of the original Rmd
-files are suffixed with '.built', to indicate their state to the make process,
-thereby allowing all operations to be idempotent.
+The implementation is written for portability and is POSIX-compliant. A
+makefile controls the operation, calling shell scripts to perform each
+operation.
+
+'make build' attempts to generate an html file for every (case-insensitive) Rmd
+file. If successful, the html file is sent to the 'build-successful' directory.
+In the case of failure to compile, the faulty Rmd files are copied to a
+'build-failure' directory. All of the original Rmd files are suffixed with
+'.built', to indicate their state to the make process, thereby allowing all
+operations to be idempotent.
