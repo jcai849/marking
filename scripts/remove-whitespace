@@ -1,0 +1,12 @@
+#!/bin/sh
+
+#find ../submissions/ -name "* *" -type f |\
+#	     tee whitespacefiles |\
+#	     sed 's/ /_/g' |\
+#	     paste - whitespacefiles |\
+#	     awk -F$'\t' '{system("mv \"" $2 "\" \"" $1 "\"")}'
+#rm whitespacefiles
+
+for i in $(find ../submissions/ -name "* *" -type f ); do
+	mv "$i" "$(echo $i | sed 's/ /_/g')"
+done
