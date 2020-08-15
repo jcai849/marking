@@ -1,0 +1,7 @@
+Build changes filenames to reflect build failure or success instead of directory shift
+Build moves output of build to output directory, and next best for failed builds to output as well
+Build fully compatible with new style of lab (.tar.gz, makefiles)
+Build creates log file for failed builds
+Mark
+Email
+Archive
