@@ -1,0 +1,13 @@
+#!/bin/sh
+
+SUBMISSION=$(basename ${1})
+SUBMISSIONBASE=${SUBMISSION%.[rR][mM][dD]}
+
+cp ${1} ../build-dir; cd ../build-dir; ls
+Rscript -e "rmarkdown::render('${SUBMISSION}', rmarkdown::html_document())" >/dev/null &&\
+ 	(echo success
+ 	mv ${SUBMISSIONBASE}.html ../build-success/
+ 	mv ${1} ../submissions/${SUBMISSIONBASE}.Rmd.built; rm -f *) ||\
+ 	(echo failure
+ 	mv ${SUBMISSION} ../build-failure/${SUBMISSIONBASE}.Rmd
+ 	mv ${1} ../submissions/${SUBMISSIONBASE}.Rmd.built; rm -f *)

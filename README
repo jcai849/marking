@@ -1,0 +1,17 @@
+INSTRUCTIONS
+
+First, navigate to the scripts directory. This is the main seat of operations.
+Run 'init'.  Then, place the student submissions in a 'submissions' directory,
+within the root marking directory.  Build all of the submissions with 'make
+build' from within the scripts directory.  Mark the submissions with 'make
+mark'.  Email the marking results with 'make email'.  All of the marks are in a
+'marks' file in the root directory.
+
+MECHANISM
+
+A makefile controls the build. 'make build' produces, for every
+(case-insensitive) Rmd file, the resulting output (forced to html) in a
+'build-successful' directory. For the builds that fail, their Rmd files are
+copied to a 'build-failure' directory. The original Rmd files are suffixed with
+'.built', to indicate their state to make, thereby allowing all operations to
+be idempotent.
