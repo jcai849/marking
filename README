@@ -1,3 +1,8 @@
+FUNCTIONALITY
+
+The 'build' component, and the 'init', 'format-submissions' and 'summarise'
+scripts are functional.
+
 INSTRUCTIONS
 
 First, navigate to the scripts directory. This is the main seat of operations.
