@@ -1,14 +1,14 @@
 SUBMISSIONSDIR := ../submissions
 SUBMISSIONS := $(wildcard $(SUBMISSIONSDIR)/*.[rR][mM][dD])
-BUILT := $(addsuffix .Rmd.built,$(basename $(SUBMISSIONS)))
-MARKED := $(addsuffix .Rmd.marked,$(basename $(basename $(wildcard $(SUBMISSIONSDIR)/*.Rmd.built))))
+BUILT := $(addsuffix .built,$(basename $(SUBMISSIONS)))
+MARKED := $(addsuffix .marked,$(basename $(basename $(wildcard $(SUBMISSIONSDIR)/*.build*))))
 
 .PHONY: build mark
 
 build: $(BUILT)
 
-%.Rmd.built: %.[Rr][mM][dD]
-	./build $<
+%.built: %.[Rr][mM][dD]
+	./build $< 2
 
 mark: $(MARKED)
 

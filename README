@@ -1,24 +1,25 @@
 INSTRUCTIONS
 
 First, navigate to the scripts directory. This is the main seat of operations.
-Run 'init'.  Then, place the student submissions in the newly generated
-'submissions' directory, within the root marking directory.  Build all of the
-submissions with 'make build' from within the scripts directory.  Mark the
-submissions with 'make mark'.  Email the marking results with 'make email'
-(assuming that you have the 'mail' program set up on your machine).  All of the
-marks are in a 'marks' file in the root directory. The process can be stopped
-and resumed at any point, and can include additional student submissions
-midway, without requiring any restarts.
+Run 'init'. Then, place the student submissions in the newly generated
+'submissions' directory, within the root marking directory. They likely need
+formatting, which can be done with the 'format-submissions' script. Build all
+of the submissions with 'make build' from within the scripts directory. Mark
+the submissions with 'make mark'. Email the marking results with 'make email'
+(assuming that you have the 'mail' program set up on your machine). Summarise
+the marks with 'summarise', taking the name of the marks file as argument. The
+process can be stopped and resumed at any point, and can include additional
+student submissions midway, without requiring any restarts.
 
 MECHANISM
 
-The implementation is written for portability and is POSIX-compliant. A
-makefile controls the operation, calling shell scripts to perform each
+A makefile controls the operation, calling shell scripts to perform each
 operation.
 
-'make build' attempts to generate an html file for every (case-insensitive) Rmd
-file. If successful, the html file is sent to the 'build-successful' directory.
-In the case of failure to compile, the faulty Rmd files are copied to a
-'build-failure' directory. All of the original Rmd files are suffixed with
-'.built', to indicate their state to the make process, thereby allowing all
-operations to be idempotent.
+'make build' calls the 'build' shell script to generate an html file for every
+(case-insensitive) Rmd file, with a given timeout. If successful, the html file
+is sent to the 'output' directory.  In the case of failure to compile within
+the time limit, a log of stderr is recorded in the basename of the Rmd file in
+the 'logs' directory. All of the original Rmd files have their suffixes changed
+to either '.buildsuccess' or '.buildfailure', to indicate their state to the
+make process, thereby allowing all operations to be idempotent.

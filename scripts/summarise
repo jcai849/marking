@@ -1,0 +1,2 @@
+#!/bin/sh
+awk -F'\t' '{ print $2 }' $1 | Rscript -e 'x<-scan(file("stdin"));summary(x);hist(x)'

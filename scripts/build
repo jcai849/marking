@@ -1,15 +1,16 @@
 #!/bin/sh
-
+# $1: filename; $2: timeout (mins)
 SUBMISSION=$(basename ${1})
 SUBMISSIONBASE=${SUBMISSION%.[rR][mM][dD]}
 
-cp "${1}" ../build-dir; cd ../build-dir; ls
-Rscript -e "rmarkdown::render('${SUBMISSION}', rmarkdown::html_document())" >/dev/null &&\
+cp "${1}" ../build-dir; cd ../build-dir
+timeout -v ${2}m Rscript --vanilla -e "rmarkdown::render('${SUBMISSION}', rmarkdown::html_document())" \
+	>/dev/null 2>../logs/"${SUBMISSIONBASE}".log &&\
  	(echo success
- 	mv "${SUBMISSIONBASE}".html ../build-success/
- 	mv "${1}" ../submissions/"${SUBMISSIONBASE}".Rmd.built
+	rm -f ../logs/"${SUBMISSIONBASE}".log
+ 	mv "${SUBMISSIONBASE}".html ../output/
+ 	mv "${1}" ../submissions/"${SUBMISSIONBASE}".buildsuccess
 	find . ! -name 'covid-*.csv' -delete) ||\
  	(echo failure
- 	mv "${SUBMISSION}" ../build-failure/"${SUBMISSIONBASE}".Rmd
- 	mv "${1}" ../submissions/"${SUBMISSIONBASE}".Rmd.built
+ 	mv "${1}" ../submissions/"${SUBMISSIONBASE}".buildfailure
 	find . ! -name 'covid-*.csv' -delete)
