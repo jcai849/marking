@@ -1,7 +1,7 @@
 SUBMISSIONSDIR := ../submissions
 SUBMISSIONS := $(wildcard $(SUBMISSIONSDIR)/*.[rR][mM][dD])
 BUILT := $(addsuffix .built,$(basename $(SUBMISSIONS)))
-MARKED := $(addsuffix .marked,$(basename $(basename $(wildcard $(SUBMISSIONSDIR)/*.build*))))
+MARKED := $(addsuffix .marked,$(basename $(wildcard $(SUBMISSIONSDIR)/*.build*)))
 
 .PHONY: build mark
 
@@ -12,10 +12,10 @@ build: $(BUILT)
 
 mark: $(MARKED)
 
-%.Rmd.marked: ../build-success/%.html
+%.marked: %.buildsuccess
 	./mark $<
 
-%.Rmd.marked: ../build-failure/%.Rmd
-	./mark $<
+%.marked: %.buildfailure
+	./mark -bf $<
 
 print-% : ; @echo $* = $($*)
