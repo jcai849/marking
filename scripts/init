@@ -1,3 +1,4 @@
 #!/bin/sh
 
-mkdir -p ../{output,logs,submissions,build-dir,build-failure,build-success}
+mkdir -p ../output ../logs ../submissions ../build-dir
+touch ../marks

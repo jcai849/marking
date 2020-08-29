@@ -1,0 +1,14 @@
+#!/bin/sh
+
+SUBMISSION=`basename "$1"`
+SUBMISSIONBASE=${SUBMISSION%.buildsuccess}
+
+qutebrowser ../output/$SUBMISSIONBASE.html 2>/dev/null &
+echo -n "Comments: "
+read comment
+echo -n "Grade: "
+read grade
+
+echo "${SUBMISSIONBASE}\t${grade}\t${comment}" >>../marks
+
+mv "$1" ../submissions/"${SUBMISSIONBASE}".marked

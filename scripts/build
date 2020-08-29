@@ -1,16 +1,37 @@
 #!/bin/sh
-# $1: filename; $2: timeout (mins)
+
+usage() {
+	cat <<EOF 
+usage: `basename $0` [-th] file [timeout]
+  -h		display help message and exit
+  file		name of file to build
+  timeout	limit on time to build before failing (default 2 mins)
+EOF
+}
+
+while getopts 'h' opt
+do
+	case $opt in
+		h) usage; exit 1 ;;
+	esac
+done
+shift `expr $OPTIND - 1`
+if test $# -eq 0
+then
+	usage; exit 1
+fi
+
 SUBMISSION=$(basename ${1})
-SUBMISSIONBASE=${SUBMISSION%.[rR][mM][dD]}
+SUBMISSIONBASE=${SUBMISSION%.rmd}
 
 cp "${1}" ../build-dir; cd ../build-dir
-timeout -v ${2}m Rscript --vanilla -e "rmarkdown::render('${SUBMISSION}', rmarkdown::html_document())" \
+timeout ${2=2}m Rscript --vanilla -e "rmarkdown::render('${SUBMISSION}', rmarkdown::html_document())" \
 	>/dev/null 2>../logs/"${SUBMISSIONBASE}".log &&\
- 	(echo success
-	rm -f ../logs/"${SUBMISSIONBASE}".log
- 	mv "${SUBMISSIONBASE}".html ../output/
- 	mv "${1}" ../submissions/"${SUBMISSIONBASE}".buildsuccess
-	find . ! -name 'covid-*.csv' -delete) ||\
- 	(echo failure
- 	mv "${1}" ../submissions/"${SUBMISSIONBASE}".buildfailure
-	find . ! -name 'covid-*.csv' -delete)
+  	(echo "[32mBuild Successful[0m"
+ 	rm -f ../logs/"${SUBMISSIONBASE}".log
+  	mv "${1}" ../submissions/"${SUBMISSIONBASE}".buildsuccess
+  	mv -f ${SUBMISSIONBASE}.html ../output/
+ 	rm -rf *) ||\
+  	(echo "[31mBuild Fail[0m"
+  	mv "${1}" ../submissions/"${SUBMISSIONBASE}".buildfailure
+ 	rm -rf *)

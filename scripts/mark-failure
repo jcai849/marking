@@ -1,0 +1,14 @@
+#!/bin/sh
+
+SUBMISSION=`basename "$1"`
+SUBMISSIONBASE=${SUBMISSION%.buildfailure}
+
+pager "$1"
+echo -n "Comments: "
+read comment
+echo -n "Grade: "
+read grade
+logmessage="Document failed to build on VM. Output of build: `tr '\n' ' ' <../logs/${SUBMISSIONBASE}.log`"
+echo "${SUBMISSIONBASE}\t${grade}\t${comment}. ${logmessage}" >>../marks
+
+mv "$1" ../submissions/"${SUBMISSIONBASE}".marked
