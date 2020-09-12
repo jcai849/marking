@@ -1,21 +1,19 @@
 FUNCTIONALITY
 
-The 'build' component, and the 'init' and 'summarise' scripts are functional.
+The 'init', 'build', and 'mark' components, and 'summarise' scripts are
+functional.
 
 INSTRUCTIONS
 
-First, ensure that all submissions are named as *.rmd. This means extracting
-all tarballs etc.
+First, put the submissions.zip file from canvas in the top level of the
+directory and navigate to the scripts directory. Then run make init, in order
+to set up the submissions appropriately.
 
-Navigate to the scripts directory. This is the main seat of operations.  Run
-'init'. Then, place the student submissions in the newly generated
-'submissions' directory, within the root marking directory. Build all of the
-submissions with 'make build' from within the scripts directory. Mark the
-submissions with 'make mark'. Email the marking results with 'make email'
-(assuming that you have the 'mail' program set up on your machine). Summarise
-the marks with 'summarise', taking the name of the marks file as argument. The
-process can be stopped and resumed at any point, and can include additional
-student submissions midway, without requiring any restarts.
+Build all of the submissions with 'make build' from within the scripts
+directory. Mark the submissions with 'make mark'. Email the marking results
+with 'make email' (assuming that you have the 'mail' program set up on your
+machine). Summarise the marks with 'summarise', taking the name of the marks
+file as argument. 
 
 MECHANISM
 
