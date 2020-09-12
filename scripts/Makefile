@@ -3,7 +3,11 @@ SUBMISSIONS := $(wildcard $(SUBMISSIONSDIR)/*.rmd)
 BUILT := $(addsuffix .built,$(basename $(SUBMISSIONS)))
 MARKED := $(addsuffix .marked,$(basename $(wildcard $(SUBMISSIONSDIR)/*.build*)))
 
-.PHONY: build mark
+.PHONY: build mark init
+
+init:
+	setup-dirs
+	setup-subs
 
 build: $(BUILT)
 

@@ -1,5 +1,0 @@
-#!/bin/sh
-
-for i in $(find ../submissions/ -name "* *" -type f ); do
-	mv "$i" "$(echo $i | sed 's/ /_/g')"
-done
