@@ -7,7 +7,8 @@ INSTRUCTIONS
 
 First, put the submissions.zip file from canvas in the top level of the
 directory and navigate to the scripts directory. Then run make init, in order
-to set up the submissions appropriately.
+to set up the submissions appropriately. This makes use of the ``-execdir''
+flag to ``find'', so requires current directory to not be in $PATH
 
 Build all of the submissions with 'make build' from within the scripts
 directory. Mark the submissions with 'make mark'. Email the marking results

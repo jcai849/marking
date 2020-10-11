@@ -1,4 +1,5 @@
-initialise output with submitted pdf's; change marking scripts to reflect
+change marking scripts to reflect output being pre-populated
+Put makefile in top-level, so no need for cd'ing into scripts/
 Submit: generate submission csv from canvas gradebook download
 Email; use student list
 Archive

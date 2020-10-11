@@ -6,8 +6,8 @@ MARKED := $(addsuffix .marked,$(basename $(wildcard $(SUBMISSIONSDIR)/*.build*))
 .PHONY: build mark init
 
 init:
-	setup-dirs
-	setup-subs
+	./setup-dirs
+	./setup-subs
 
 build: $(BUILT)
 

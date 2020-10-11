@@ -2,5 +2,8 @@
 
 unzip ../submissions.zip -d ../unpack-subs
 find ../unpack-subs -name '*.tar.gz' -execdir tar -xzf {} \;
-rename 'y/ /_/;y/A-Z/a-z/;s/_.*/.rmd/' `find ../unpack-subs -name '*.[Rr]md'`
+find ../unpack-subs -name '* *' -exec rename 'y/ /_/' {} \;
+find ../unpack-subs -name '*.[Rr]md' | rename 'y/A-Z/a-z/;s/_.*/.rmd/'
 find ../unpack-subs -name '*.rmd' -exec mv {} ../submissions \;
+find ../unpack-subs -name '*.html' | rename 'y/A-Z/a-z/;s/_.*/.html/'
+find ../unpack-subs -name '*.html' -exec mv {} ../output \;
