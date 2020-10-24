@@ -1,5 +1,7 @@
 #!/bin/sh
 
+RS='\036'
+US='\035'
 SUBMISSION=`basename "$1"`
 SUBMISSIONBASE=${SUBMISSION%.buildsuccess}
 
@@ -9,6 +11,6 @@ read comment
 echo -n "Grade: "
 read grade
 
-echo "${SUBMISSIONBASE}\t${grade}\t${comment}" >>../marks
+printf "${SUBMISSIONBASE}${US}${grade}${US}${comment}${RS}" >>../marks
 
 mv "$1" ../submissions/"${SUBMISSIONBASE}".marked

@@ -1,14 +1,18 @@
 #!/bin/sh
 
+RS='\036'
+US='\035'
 SUBMISSION=`basename "$1"`
 SUBMISSIONBASE=${SUBMISSION%.buildfailure}
 
-pager "$1"
+test -e ../output/$SUBMISSIONBASE.html &&
+	qutebrowser ../output/$SUBMISSIONBASE.html 2>/dev/null & ||
+	pager "$1"
 echo -n "Comments: "
 read comment
 echo -n "Grade: "
 read grade
 logmessage="Document failed to build on VM. Output of build: `tr '\n' ' ' <../logs/${SUBMISSIONBASE}.log`"
-echo "${SUBMISSIONBASE}\t${grade}\t${comment}. ${logmessage}" >>../marks
+printf "${SUBMISSIONBASE}${US}${grade}${US}${comment}. ${logmessage}${RS}" >>../marks
 
 mv "$1" ../submissions/"${SUBMISSIONBASE}".marked

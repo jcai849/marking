@@ -1,3 +1,7 @@
+DEPENDENCIES
+
+POSIX utils, rename, qutebrowser
+
 FUNCTIONALITY
 
 The 'init', 'build', and 'mark' components, and 'summarise' scripts are
@@ -28,3 +32,10 @@ the time limit, a log of stderr is recorded in the basename of the Rmd file in
 the 'logs' directory. All of the original Rmd files have their suffixes changed
 to either '.buildsuccess' or '.buildfailure', to indicate their state to the
 make process, thereby allowing all operations to be idempotent.
+
+CONNECTING TO UNI VM
+
+Use openfortivpn to set up a VPN. Mount a directory with cifs using:
+
+	sudo mount -t cifs -o username=username,domain=uoa,vers=2.1 \
+	//files.auckland.ac.nz/MyHome $YOUR_LOCAL_DIR
